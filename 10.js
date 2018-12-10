@@ -25,7 +25,7 @@ let findEdges = (points) =>
 
 let minEdges = findEdges(points)
 
-let minArea = (minEdges.maxX - minEdges.minX) * (minEdges.maxY - minEdges.minY)
+let minHeight = minEdges.maxY - minEdges.minY
 
 function step() {
   let newPoints = points.map(p => ({
@@ -36,10 +36,10 @@ function step() {
   }))
 
   let edges = findEdges(newPoints)
-  let area = (edges.maxX - edges.minX) * (edges.maxY - edges.minY)
+  let height = edges.maxY - edges.minY
   return {
     newPoints,
-    area,
+    height,
     edges
   }
 }
@@ -47,10 +47,10 @@ function step() {
 let i = 0
 
 while (++i) {
-  let { newPoints, area, edges } = step()
-  if (area < minArea) {
+  let { newPoints, height, edges } = step()
+  if (height < minHeight) {
     points = newPoints
-    minArea = area
+    minHeight = height
     minEdges = edges
   } else {
     break
