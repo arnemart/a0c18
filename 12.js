@@ -65,13 +65,20 @@ for (let i = 0; i < 20; i++) {
 }
 
 console.log('part 1:', sumPlants(pots));
-console.log('part 2:', 50000000000 * 62 + 293);
 
 // Find the pattern
-for (let i = 21; i <= 50000; i++) {
+for (let i = 21; i <= 1000; i++) {
   pots = nextGeneration(pots)
-  if (i % 1000 == 0) {
-    let sum = sumPlants(pots);
-    console.log(i, sum, sum / i, ((i * 62) + 293) == sum);
+}
+
+let sum = sumPlants(pots)
+let multiplier, constant
+outer: for (multiplier = 1; multiplier < 1000; multiplier++) {
+  for (constant = 0; constant < 1000; constant++) {
+    if (1000 * multiplier + constant == sum) {
+      break outer
+    }
   }
 }
+
+console.log('part 2:', 50000000000 * multiplier + constant);
